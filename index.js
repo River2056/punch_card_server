@@ -49,4 +49,4 @@ app.get('/write-time', async (req, res) => {
     res.end();
 });
 
-app.listen(PORT, () => console.log(`listening at port: ${PORT}`));
+app.listen(process.env.PORT || PORT, () => console.log(`listening at port: ${PORT}`));
