@@ -1,10 +1,13 @@
 const express = require('express');
 const mongo = require('mongodb');
+const cors = require('cors')
 const MongoClient = mongo.MongoClient;
 const app = express();
 const PORT = 5000
 const dbUrl = 'mongodb+srv://River2056:kevin2056@cluster0.spkcl.mongodb.net/pcard?retryWrites=true&w=majority';
 let client = null;
+
+app.use(cors());
 
 app.get('/', (req, res) => {
     console.log('url hit at /');
