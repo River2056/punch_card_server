@@ -50,10 +50,7 @@ app.get('/write-time', async (req, res) => {
     });
 
     console.log('db insert done!');
-    res.send(`
-        <h1>you hit write time url</h1>
-        <h2>punching card to firebase...</h2>
-    `);
+    res.send({ status: 'success' });
     res.end();
 });
 
@@ -72,19 +69,7 @@ app.get('/get-monthly', async (req, res) => {
         const collection = await client.db("pcard").collection("attendance");
         const cursor = await collection.find({ "year": year.toString(), "month": month.toString() });
         const data = await cursor.toArray();
-        const pageDataArray = data.map(e => {
-            return `${JSON.stringify(e)}, <br/>`;
-        });
-        pageData = pageDataArray.join('\n');
-        console.log(pageData);
-        res.send(`
-            <h1>Results for year ${year}, month ${month}</h1>
-            <div>
-                <ol>
-                    ${pageData.split(', ').map(e => `<li>${e}</li>`)}
-                </ol>
-            </div>
-        `);
+        res.send(data);
         console.log('done querying month data!');
         res.end();
         await client.close();
